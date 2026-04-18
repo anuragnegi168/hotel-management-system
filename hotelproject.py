@@ -36,6 +36,24 @@ def view_rooms():
     for r in rooms:
         print(f"Room: {["Room No"]} , Type: {["Room Type"]} , Price: {["Price"]} , Available: {["Available"]}")
 
+def book_room():
+    room = int(input("Enter the room you want to book : "))
+    for r in rooms:
+        if r["Room No"] == room:
+            if r["Available"] == True:
+                r["Customer Name"] = input("Enter the name of customer : ")
+                r["Days"] = int(input("Enter the days customer want to stay : "))
+                r["Phone Number"] = input("Enter the customer phone number : ")
+                r["Available"] = False
+                print(f"Room {room} booked successfully for {r['Customer Name']}")
+                break
+            else:
+                print("room not available:")
+                break
+    else:
+        print("Room not found")
+
+
 while True:
     print("\n----------Hotel Management System----------")
     print("""\n1. Add Room
