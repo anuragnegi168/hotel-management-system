@@ -37,7 +37,13 @@ def view_rooms():
         print(f"Room: {["Room No"]} , Type: {["Room Type"]} , Price: {["Price"]} , Available: {["Available"]}")
 
 def book_room():
-    room = int(input("Enter the room you want to book : "))
+    print("-----Room Booking-----")
+    try:
+        room = int(input("Enter the room you want to book : "))
+    except:
+        print("Invalid input")
+        return
+
     for r in rooms:
         if r["Room No"] == room:
             if r["Available"] == True:
@@ -54,19 +60,36 @@ def book_room():
         print("Room not found")
 
 
+def checkout_room():
+    print("-----Checkout Room-----")
+    try:
+        room = int(input("Enter the room no : "))
+    except:
+        print("Invalid input")
+        return
+    
+    for r in rooms:
+        if r["Room No"] == room:
+            if not r["Available"]:
+                r["Customer Name"] = ""
+                r["Days"] = 0
+                r["Phone Number"] = ""
+                r["Available"] = True
+                print("Room Checkout successfully")
+                break
+            else:
+                print("Room is already empty")
+                break
+    else:
+        print("Room not found")
+
+
 while True:
     print("\n----------Hotel Management System----------")
     print("""\n1. Add Room
 2. View All Rooms
 3. Book Room
 4. Check-Out Room
-5. Search Room
-6. Update Room
-7. Delete Room
-8. Show Available Rooms
-9. Show Booked Rooms
-10. Generate Bill
-11. Hotel Summary
 12. Exit """)
     choice = int(input("Enter the menu number : "))
 
@@ -74,6 +97,10 @@ while True:
         add_room()
     elif choice == 2:
         view_rooms()
+    elif choice == 3:
+        book_room()
+    elif choice == 4:
+        checkout_room()
     elif choice == 12:
         break
     else:
