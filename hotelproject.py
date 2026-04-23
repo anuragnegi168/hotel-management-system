@@ -82,7 +82,52 @@ def checkout_room():
                 break
     else:
         print("Room not found")
+        
+def search_room():
+    print("-----search Rooms-----")
+    try:
+        room = int(input("Enter the room no : "))
+    except:
+        print("Invalid input")
+        return
+    
+    for r in rooms:
+        if r["Room No"] == room:
+            print(f"Room: {r['Room No']}, Type: {r['Room Type']}, Price: {r['Price']}, Available: {r['Available']}")
+            break
+    else:
+        print("Room not found")
+        
 
+def update_room():
+    print("-----Update Rooms-----")
+    try:
+        room = int(input("Enter the room no you want to update : "))
+    except:
+        print("Invalid input")
+        return
+    
+    for r in rooms:
+        if r["Room No"] == room:
+            while True:
+                r_type = input("Enter the room Type (Ac, Non-AC, Deluxe) : ").strip()
+                if r_type.lower() in [t.lower() for t in room_type]:
+                    for t in room_type:
+                        if t.lower() == r_type.lower():
+                            r_type = t
+                            r["Room Type"] = r_type
+                            break
+                    break
+                else:
+                    print("Invalid input")
+            try:
+                r["Price"] = int(input("Enter the room price : "))
+                print("Room updated successfully")
+                break
+            except:
+                print("Invalid input,try again")
+    else:
+        print("Room not found")
 
 while True:
     print("\n----------Hotel Management System----------")
@@ -90,6 +135,13 @@ while True:
 2. View All Rooms
 3. Book Room
 4. Check-Out Room
+5. Search Room
+6. Update Room
+7. Delete Room
+8. Show Available Rooms
+9. Show Booked Rooms
+10. Generate Bill
+11. Hotel Summary
 12. Exit """)
     choice = int(input("Enter the menu number : "))
 
@@ -101,6 +153,10 @@ while True:
         book_room()
     elif choice == 4:
         checkout_room()
+    elif choice == 5:
+        search_room()
+    elif choice == 6:
+        update_room()
     elif choice == 12:
         break
     else:
