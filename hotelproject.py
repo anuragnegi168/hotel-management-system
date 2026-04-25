@@ -129,6 +129,43 @@ def update_room():
     else:
         print("Room not found")
 
+def delete_room():
+    print("-----Delete Room-----")
+
+    try:
+        room = int(input("Enter room no. : "))
+    except:
+        print("Invalid input")
+        return
+
+    for r in rooms:
+        if r["Room No"] == room:
+            rooms.remove(r)
+            print("Room Deleted Successfully")
+            return
+    else:
+        print("Room not found")
+
+def show_available_room():
+    print("-----Availaible Rooms-----")
+    found = False
+    for r in rooms:
+        if r["Available"] == True:
+            print(f"Room: {r['Room No']}  Room Type: {r['Room Type']}  price: {r['Price']}")
+            found = True
+    if not found:
+        print("Room not available")
+
+def show_booked_room():
+    print("-----Booked Rooms-----")
+    found = False
+    for r in rooms:
+        if r["Available"] == False:
+            print(f"Room: {r['Room No']}  {r['Customer Name']}  Days: {r['Days']}")
+            found = True
+    if not found:
+        print("No rooms are booked")
+
 while True:
     print("\n----------Hotel Management System----------")
     print("""\n1. Add Room
@@ -157,6 +194,12 @@ while True:
         search_room()
     elif choice == 6:
         update_room()
+    elif choice == 7:
+        delete_room()
+    elif choice == 8:
+        show_available_room()
+    elif choice == 9:
+        show_booked_room()
     elif choice == 12:
         break
     else:
