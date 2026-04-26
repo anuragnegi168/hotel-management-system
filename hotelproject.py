@@ -166,6 +166,34 @@ def show_booked_room():
     if not found:
         print("No rooms are booked")
 
+def Generate_bill():
+    try:
+        room = int(input("Enter the room no for bill :"))
+    except:
+        print("Invaid input")
+        return
+    
+    for r in rooms:
+        if r["Room No"] == room:
+            if r["Available"] == False:
+                bill = r["Price"] * r["Days"]
+                tax = bill * 0.18
+                total = bill + tax
+
+                print(f"Room No: {room}")
+                print(f"Customer Name: {r['Customer Name']}")
+                print(f"Days Stayed: {r['Days']}")
+                print(f"Room Price per Day: {r['Price']}")
+                print(f"Total Bill (without tax): {bill}")
+                print(f"Tax (18%): {tax}")
+                print(f"Final Amount: {total}")
+                return
+            else:
+                print("Room is not booked")
+                return
+
+    print("Room not found")
+
 while True:
     print("\n----------Hotel Management System----------")
     print("""\n1. Add Room
@@ -200,6 +228,8 @@ while True:
         show_available_room()
     elif choice == 9:
         show_booked_room()
+    elif choice == 10:
+        Generate_bill()
     elif choice == 12:
         break
     else:
