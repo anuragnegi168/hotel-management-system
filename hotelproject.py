@@ -194,6 +194,18 @@ def Generate_bill():
 
     print("Room not found")
 
+def Hotel_summary():
+    print("-----Hotel Summary-----")
+    total_rooms = len(rooms)
+    available_rooms = sum(1 for r in rooms if r["Available"])
+    booked_rooms = total_rooms - available_rooms
+    Total_income = sum(r["Price"] * r["Days"] for r in rooms if not r["Available"])
+    print(f"Total Rooms = {total_rooms}")
+    print(f"Available rooms = {available_rooms}")
+    print(f"Booked Rooms = {booked_rooms}")
+    print(f"Total income = {Total_income}")
+
+
 while True:
     print("\n----------Hotel Management System----------")
     print("""\n1. Add Room
@@ -230,7 +242,9 @@ while True:
         show_booked_room()
     elif choice == 10:
         Generate_bill()
+    elif choice == 11:
+        Hotel_summary()
     elif choice == 12:
         break
     else:
-        print("Invalid Input")
+        print("Invalid Input") Input")
